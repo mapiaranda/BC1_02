@@ -13,7 +13,7 @@ public class main {
 	        
 	        tablero.rellenarTableroRan(filas, columnas);
 
-	        tablero.imprimeTablero(filas, columnas);
+	        tablero.imprimirTablero(filas, columnas);
 	       
 	      
 	}
