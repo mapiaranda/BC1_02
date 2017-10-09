@@ -9,6 +9,7 @@ public class Casilla {
 	// Variables para manejar las casillas
 	private int pos_x;
 	private int pos_y;
+
 	
 	public Casilla(int id, int arena_casilla, int max_arena, int pos_x, int pos_y){
 		this.id=id;
