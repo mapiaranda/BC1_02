@@ -14,11 +14,11 @@ public class main {
 			switch (sc.nextInt()){
 				case 1:
 					tablero.rellenarTableroFichero();
-					tablero.imprimeTablero();
+					tablero.imprimirTablero();
 					break;
 				case 2:
-					tablero.rellenarTableroRan();
-					tablero.imprimeTablero();
+					tablero.generarTerrenoRnd();
+					tablero.imprimirTablero();
 					break;
 				default:
 					System.out.println("Número incorrecto");
