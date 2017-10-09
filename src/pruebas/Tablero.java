@@ -38,7 +38,6 @@ public class Tablero {
 		}
 		this.filas=datos[0];
 		this.columnas=datos[1];
-		System.out.println(datos[0]+" colum  "+datos[1]);
 		tablero=new int[this.filas][this.columnas];
 		for (int j = 0; j < datos[0]; j++) { //fila
 			for (int k = 0; k < datos[1]; k++) { //columna
@@ -49,13 +48,14 @@ public class Tablero {
 	//*****************************************************
 	// Métodos para generar el Terreno de Manera Aleatoria
 	//*****************************************************
+
 	
 	void generarTerrenoRnd(){
 		V =(int) (Math.random()*99)+1;;
 		filas = (int) (Math.random()*9)+1;
 		columnas = (int) (Math.random()*9)+1;
 		K=V/filas*columnas;
-		max=(int) (Math.random()*(V-1))+1;; //cantidad máxima que puede almacenar cada casilla, se pasa por parámetros
+		max=(int) (Math.random()*(V-1))+1;; //cantidad máxima que puede almacenar cada casilla
 		int total=V;
 		tablero=new int[filas][columnas];
 		for (int i = 0; i < filas; i++) {
