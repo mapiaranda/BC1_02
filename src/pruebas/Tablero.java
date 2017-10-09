@@ -74,26 +74,27 @@ public class Tablero {
 	}
 	
 	void generarTerrenoRnd(){
-		
-		
-		int k=0; //se pide por teclado, pasar por parametros desde el main
-		int v =(int) (Math.random()*99);;
-		int filas = (int) (Math.random()*9);
-		int columnas = (int) (Math.random()*9);
-		k=v/filas*columnas;
-		int aux;
-		int max=(int) (Math.random()*v);; //cantidad máxima que puede almacenar cada casilla, se pasa por parámetros
-		int total=0;
+		V =(int) (Math.random()*99)+1;;
+		filas = (int) (Math.random()*9)+1;
+		columnas = (int) (Math.random()*9)+1;
+		K=V/filas*columnas;
+		max=(int) (Math.random()*(V-1))+1;; //cantidad máxima que puede almacenar cada casilla, se pasa por parámetros
+		int total=V;
+		tablero=new int[filas][columnas];
 		for (int i = 0; i < filas; i++) {
 			for (int j = 0; j < columnas; j++) {
-				tablero[i][j] = (int) (Math.random() * max);
-				total = total + tablero[i][j];
+				if(total<max){
+					tablero[i][j]=(int) (Math.random()*total);
+				}else{
+					tablero[i][j] = (int) (Math.random()*max);
+				}
+
+				total = total - tablero[i][j];
 			}
 			System.out.println("\n");
 		}
-		
+
 	}
-	
 
 
 	void imprimirTablero() {
