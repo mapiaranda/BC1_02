@@ -50,29 +50,6 @@ public class Tablero {
 	// Métodos para generar el Terreno de Manera Aleatoria
 	//*****************************************************
 	
-	void comprobarTerrenoRnd (){
-		// Lo primero es comprobar que con los datos introducidos se pueda generar el terreno
-		
-		int k=0; //se pide por teclado, pasar por parametros desde el main
-		int v =0;
-		int filas=0; // se pide por teclado
-		int columnas=0; // se pide por teclado
-		v = filas*columnas*k;
-		int comprobar = v/(filas*columnas); //Variable para calcular el peso que hay en cada casilla
-		
-		/*
-		 * Si al calcular V y dividirlo entre el número de casillas el numero no es entero,
-		 * no es posible generar el terreno 
-		 */
-		
-			if (comprobar%1==0){
-				System.out.println("No se puede generar el terreno");
-			}
-			else{
-				generarTerrenoRnd();
-			}
-	}
-	
 	void generarTerrenoRnd(){
 		V =(int) (Math.random()*99)+1;;
 		filas = (int) (Math.random()*9)+1;
