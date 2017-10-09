@@ -87,30 +87,14 @@ public class Tablero {
 		for (int i = 0; i < filas; i++) {
 			for (int j = 0; j < columnas; j++) {
 				tablero[i][j] = (int) (Math.random() * max);
-					//necesite un método para comprobar que se vaya rellenando correctamente sin pasarse de V
 				total = total + tablero[i][j];
-				comprobarTerrenoValido(total); //le tengo que pasar el valor que haya generado
 			}
 			System.out.println("\n");
 		}
 		
 	}
 	
-	void /* boolean */comprobarTerrenoValido(int total){ // Boolean para seguir o no construyendo el terreno
-		int v=0; //que almacena el volumen máximo del terreno, paso por parámetros
-		int cantidad=0; //almacenar el valor que se le haya pasado por parámetros
-		int valorComprobar  = total;
-		
-		if(valorComprobar <= v){
-			imprimirTablero();
-		}
-		else {
-			System.out.println("El terreno generado no es válido. /n" + "Se va a generar otro terreno.");
-			System.out.println("----------------------------------------------------------------------");
-			generarTerrenoRnd(); // llamada al método para generar un nuevo terreno
-		}
-		
-	}
+
 
 	void imprimirTablero() {
 		for (int i = 0; i < this.filas; i++) {
