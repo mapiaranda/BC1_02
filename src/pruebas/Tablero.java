@@ -17,6 +17,8 @@ public class Tablero {
 
 	}
 
+
+
 	void rellenarTableroFichero(){
 		Scanner entrada = null;
 		try {
@@ -25,22 +27,26 @@ public class Tablero {
 			e.printStackTrace();
 		}
 		int [] datos = new int [6];
-		Tractor t=new Tractor(datos[0],datos[1]);
-		for (int j = 0; j < 5; j++) {
+
+		for (int j = 0; j < 6; j++) {
 			datos[j]=entrada.nextInt();
 		}
-		this.filas=datos[0];
-		this.columnas=datos[1];
+		this.filas=datos[4];
+		this.columnas=datos[5];
+		this.max=datos[3];
+		this.K=datos[2];
 		Casilla casi;
-		tablero=new Casilla[this.filas][this.columnas];
+		this.tablero=new Casilla[this.filas][this.columnas];
+		Tractor t=new Tractor(datos[0],datos[1]);
 		int i=0;
-		for (int j = 0; j < datos[0]; j++) { //fila
-			for (int k = 0; k < datos[1]; k++) { //columna
+		for (int j = 0; j < this.filas; j++) { //fila
+			for (int k = 0; k < this.columnas; k++) { //columna
 				casi=new Casilla(i, entrada.nextInt(), max, j, k);
-				tablero[j][k]=casi;
+				this.tablero[j][k]=casi;
 				i++;
 			}
 		}
+
 		t.adyacentes();
 	}
 	//*****************************************************
@@ -83,7 +89,6 @@ public class Tablero {
 			for (int j = 0; j < this.columnas; j++) {
 				System.out.print(tablero[i][j] + "\t");
 			}
-			System.out.println("\n");
 		}
 	}
 

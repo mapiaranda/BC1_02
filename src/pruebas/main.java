@@ -17,7 +17,8 @@ public class main {
 					switch (sc.nextInt()) {
 						case 1:
 							tablero.rellenarTableroFichero();
-							tablero.imprimirTablero();
+							//tablero.imprimirTablero();
+
 							break;
 						case 2:
 							tablero.generarTerrenoRnd();

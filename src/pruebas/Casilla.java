@@ -9,6 +9,7 @@ public class Casilla {
 	// Variables para manejar las casillas
 	private int pos_x;
 	private int pos_y;
+	private boolean visitado;
 
 	
 	public Casilla(int id, int arena_casilla, int max_arena, int pos_x, int pos_y){
@@ -17,6 +18,15 @@ public class Casilla {
 		this.max_arena = max_arena;
 		this.pos_x = pos_x;
 		this.pos_y = pos_y;
+		this.visitado=false;
+	}
+
+	public boolean isVisitado() {
+		return visitado;
+	}
+
+	public void setVisitado(boolean visitado) {
+		this.visitado = visitado;
 	}
 
 	// Métodos getters y setters de todas las variables
@@ -62,7 +72,7 @@ public class Casilla {
 	
 	// Método toString
 	public String toString(){
-		String cadena="Casilla "+this.id+":\n\t-Arena Actual:"+this.arena_casilla+
+		String cadena="\n Casilla "+this.id+":\n\t-Arena Actual:"+this.arena_casilla+
 				"\n\t-Max Arena:"+this.max_arena+"\n\t-Coordenada:("+this.pos_x+","+this.pos_y+")";
 		
 		return cadena;
