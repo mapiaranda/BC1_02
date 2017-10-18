@@ -41,19 +41,20 @@ public class Tablero {
 		int sobra=max-tablero[posX][posY].getArena_casilla();
 
 		for(int i=0; i<sobra;i++){
-			
+			if((adya.get(i).getArena_casilla()+i)<max){
+				adya.get(i).setArena_casilla(adya.get(i).getArena_casilla()+i);
+			}
 		}
 
-		tablero[posX][posY].setVisitado(true);
-		int contador=0;
-		for (int i=0;i<filas;i++){
-			for (int j=0; j<columnas;j++){ //Contamos los visitados de todo el tablero
-				if(tablero[i][j].isVisitado()){
-					contador+=1;
+		boolean terminado=true;
+		for (int i=0; i<filas;i++){
+			for (int j=0; j<columnas; j++){
+				if(tablero[i][j].getArena_casilla()!=K){
+					terminado=false;
 				}
 			}
 		}
-		if(contador==(filas*columnas)){ //Si todos estan visitados ya hemos terminado
+		if(terminado==true){ //Si todos estan visitados ya hemos terminado
 			//Termina
 			System.out.println("El número de sucesores es: "+contadorSucesores);
 		}else{
