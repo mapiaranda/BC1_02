@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Tablero {
+public class Terreno {
 
 	public static int filas;
 	public static int columnas;
@@ -16,13 +16,36 @@ public class Tablero {
 	int posX;
 	int posY;
 	int contadorSucesores;
+	ArrayList<Casilla> adya=new ArrayList<>();
+	ArrayList<Distribucion> d=new ArrayList<>();
+	ArrayList<Accion> acc=new ArrayList<>();
 
-	public Tablero(){
+	public Terreno(){
 
+	}
+	public void distribuirArena(int i, int sobra){
+		if(i==adya.size()){
+			Accion aci=new Accion(1, posX, posY, d);
+			acc.add(aci);
+			System.out.println(aci.toString());
+		}else {
+			Distribucion dis;
+			for (int j = sobra; j >= 0; j--) {
+				if ((adya.get(i).getArena_casilla() + j) <= max) {
+					adya.get(i).setArena_casilla(adya.get(i).getArena_casilla() + j);
+					dis = new Distribucion(j, adya.get(i).getPos_x(), adya.get(i).getPos_y());
+					d.add(dis);
+				}else{
+					dis=new Distribucion(0, adya.get(i).getPos_x(), adya.get(i).getPos_y());
+					d.add(dis);
+				}
+				distribuirArena(i + 1, sobra - dis.getCantidad() );
+				d.remove(i);
+			}
+		}
 	}
 
 	public void adyacentes(){
-		ArrayList<Casilla> adya=new ArrayList<>();
 		//comprobamos si existe casilla a la derecha, izquierda, arriba y abajo
 		if((posX+1)<filas ){
 			Casilla ca=tablero[posX+1][posY];
@@ -38,13 +61,9 @@ public class Tablero {
 			Casilla ca=tablero[posX][posY-1];
 			adya.add(ca);
 		}
-		int sobra=max-tablero[posX][posY].getArena_casilla();
-
-		for(int i=0; i<sobra;i++){
-			if((adya.get(i).getArena_casilla()+i)<max){
-				adya.get(i).setArena_casilla(adya.get(i).getArena_casilla()+i);
-			}
-		}
+		int sobra=tablero[posX][posY].getArena_casilla()-K;
+		System.out.println("arena sobrante: "+sobra);
+		distribuirArena(0, sobra);
 
 		boolean terminado=true;
 		for (int i=0; i<filas;i++){
@@ -81,7 +100,7 @@ public class Tablero {
 
 			}
 
-			adyacentes();//Volvemos a llamar al metodo, habiendo actualizado la nueva posicion del tractor
+			//adyacentes();//Volvemos a llamar al metodo, habiendo actualizado la nueva posicion del tractor
 		}
 	}
 

@@ -7,7 +7,7 @@ public class main {
 	
 	 public static void main(String[] args) 
 	    {
-			Tablero tablero = new Tablero();
+			Terreno tablero = new Terreno();
 			Scanner sc=new Scanner(System.in);
 			System.out.println("Pulsa 1 para leer de fichero");
 			System.out.println("Pulsa 2 para hacerlo aleatoriamente");
