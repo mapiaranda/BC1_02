@@ -16,31 +16,49 @@ public class Terreno {
 	int posX;
 	int posY;
 	int contadorSucesores;
+	int sobrante;
 	ArrayList<Casilla> adya=new ArrayList<>();
-	ArrayList<Distribucion> d=new ArrayList<>();
 	ArrayList<Accion> acc=new ArrayList<>();
+	ArrayList<Distribucion> d=new ArrayList<>();
 
 	public Terreno(){
 
 	}
-	public void distribuirArena(int i, int sobra){
+	public void distribuirArena(int i, int sobra, int posix, int posiy){
 		if(i==adya.size()){
-			Accion aci=new Accion(1, posX, posY, d);
-			acc.add(aci);
-			System.out.println(aci.toString());
+			ArrayList<Distribucion> daux=new ArrayList<>();
+			int cantidad=0;
+			for(int r=0;r<d.size();r++){
+				cantidad+=d.get(r).getCantidad();
+				daux.add(d.get(r));
+			}
+			boolean comp=false;
+			Accion aci=new Accion(1, posix, posiy, daux);
+			for(int a=0; a<acc.size();a++){
+				if(acc.get(a).compara(aci, acc.get(a))==true){
+					comp=true;
+				}
+			}
+			if( cantidad==sobrante && comp==false ){//
+				acc.add(aci);
+				System.out.println(aci);
+			}
+
 		}else {
 			Distribucion dis;
+
 			for (int j = sobra; j >= 0; j--) {
 				if ((adya.get(i).getArena_casilla() + j) <= max) {
-					adya.get(i).setArena_casilla(adya.get(i).getArena_casilla() + j);
 					dis = new Distribucion(j, adya.get(i).getPos_x(), adya.get(i).getPos_y());
 					d.add(dis);
 				}else{
 					dis=new Distribucion(0, adya.get(i).getPos_x(), adya.get(i).getPos_y());
 					d.add(dis);
 				}
-				distribuirArena(i + 1, sobra - dis.getCantidad() );
+				distribuirArena(i + 1, sobra - dis.getCantidad(), posix, posiy);
 				d.remove(i);
+
+
 			}
 		}
 	}
@@ -61,10 +79,15 @@ public class Terreno {
 			Casilla ca=tablero[posX][posY-1];
 			adya.add(ca);
 		}
-		int sobra=tablero[posX][posY].getArena_casilla()-K;
-		System.out.println("arena sobrante: "+sobra);
-		distribuirArena(0, sobra);
+		sobrante=tablero[posX][posY].getArena_casilla()-K;
 
+		for(int a=0; a<adya.size();a++){
+			int sobra=tablero[posX][posY].getArena_casilla()-K;
+			distribuirArena(0, sobra, adya.get(a).getPos_x(), adya.get(a).getPos_y());
+		}
+		System.out.println("Nº de sucesores: "+acc.size());
+
+		/*
 		boolean terminado=true;
 		for (int i=0; i<filas;i++){
 			for (int j=0; j<columnas; j++){
@@ -101,7 +124,7 @@ public class Terreno {
 			}
 
 			//adyacentes();//Volvemos a llamar al metodo, habiendo actualizado la nueva posicion del tractor
-		}
+		}*/
 	}
 
 	void rellenarTableroFichero(){
