@@ -7,7 +7,7 @@ public class main {
 	
 	 public static void main(String[] args) 
 	    {
-			Terreno tablero = new Terreno();
+			GenerarTerreno generar = new GenerarTerreno();
 			Scanner sc=new Scanner(System.in);
 			System.out.println("Pulsa 1 para leer de fichero");
 			System.out.println("Pulsa 2 para hacerlo aleatoriamente");
@@ -16,13 +16,12 @@ public class main {
 				try {
 					switch (sc.nextInt()) {
 						case 1:
-							tablero.rellenarTableroFichero();
+							generar.rellenarTableroFichero();
 							//tablero.imprimirTablero();
 
 							break;
 						case 2:
-							tablero.generarTerrenoRnd();
-							tablero.imprimirTablero();
+							generar.generarTerrenoRnd();
 							break;
 						default:
 							System.out.println("Número incorrecto");

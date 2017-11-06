@@ -2,15 +2,15 @@ package pruebas;
 
 public class NodoArbol implements Comparable<NodoArbol>{
 	private NodoArbol padre; //información del nodo padre
-	private Terreno Terreno; //representación del terreno actual
+	private Problema Problema; //representación del terreno actual
 	private int costo; //número de movimientos
 	private String accion; //arribar, abajo, derecha, izquierda
 	private int valor; //valor por el cual se ordenará la frontera
 	private int profundidad; //valor de la profundidad
 	
-	public NodoArbol(NodoArbol padre, Terreno Terreno, int costo, String accion, int valor, int profundidad){
+	public NodoArbol(NodoArbol padre, Problema problema, int costo, String accion, int valor, int profundidad){
 		this.padre = padre;
-		this.Terreno = Terreno;
+		this.Problema  = problema;
 		this.costo = costo;
 		this.accion = accion;
 		this.valor = valor;
@@ -37,22 +37,14 @@ public class NodoArbol implements Comparable<NodoArbol>{
 	 * 
 	 * @return Terreno
 	 */
-	public Terreno getTerreno() {
-		return Terreno;
+	public Problema getProblema() {
+		return Problema;
 	}
 	
-	/**
-	 * 
-	 * @param Terreno
-	 */
-	public void setTerreno(Terreno Terreno) {
-		this.Terreno = Terreno;
+	public void setTerreno(Problema problema) {
+		this.Problema = Problema;
 	}
 
-	/**
-	 * 
-	 * @return int
-	 */
 	public int getCosto() {
 		return costo;
 	}
@@ -130,7 +122,7 @@ public class NodoArbol implements Comparable<NodoArbol>{
 	
 	@Override
 	public String toString() {
-		return "NodoArbol [Padre=" + getPadre() + ", Terreno=" + getTerreno() + ", Costo=" + getCosto() 
+		return "NodoArbol [Padre=" + getPadre() + ", Terreno=" + getProblema() + ", Costo=" + getCosto()
 		+ ", Accion=" + getAccion() + ", Profundidad=" + getProfundidad() + ", Valor=" + getValor() + "]";
 	}
 	
