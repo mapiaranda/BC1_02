@@ -138,7 +138,7 @@ public class EspacioDeEstados {
             distribuirArena(0, sobra, adya.get(a).getPosX(), adya.get(a).getPosY());
         }
         System.out.println("Nº de sucesores: "+acc.size());
-
+        /*
         boolean terminado=true;
         for (int i=0; i<filas;i++){
             for (int j=0; j<columnas; j++){
@@ -150,6 +150,6 @@ public class EspacioDeEstados {
         if(terminado==true){ //Si todos estan visitados ya hemos terminado
             //Termina
             System.out.println("El número de sucesores es: "+contadorSucesores);
-        }
+        }*/
     }
 }
