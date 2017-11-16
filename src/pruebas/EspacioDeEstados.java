@@ -1,6 +1,7 @@
 package pruebas;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class EspacioDeEstados {
     public static int filas;
@@ -11,11 +12,12 @@ public class EspacioDeEstados {
     public int V; // cantidad de Arena que va haber en todo el tablero
     public int K; // cantidad de arena que va a haber en cada casilla
     public int max; // cantidad máxima que almacena cada casilla
-    public static Estado estados[][];
+    public Estado estados[][];
     ArrayList<Estado> adya=new ArrayList<>();
     ArrayList<Accion> acc=new ArrayList<>();
     ArrayList<Distribucion> d=new ArrayList<>();
     int sobrante;
+    ArrayList<Sucesores> suc=new ArrayList<>();
 
     public EspacioDeEstados() {
     }
@@ -76,6 +78,21 @@ public class EspacioDeEstados {
         this.max = max;
     }
 
+    public Estado[][] calcularEstado(Accion a){
+        Estado es[][] = new Estado[4][4];
+
+        for (int j=0; j<4;j++){
+            for (int k=0; k<4;k++){
+                Estado e=new Estado(estados[j][k].getId(), estados[j][k].getArena_casilla(), estados[j][k].getPosX(), estados[j][k].getPosY());
+                es[j][k]=e;
+
+            }
+        }
+        for (int i=0; i<a.getDis().size(); i++){
+           es[a.getDis().get(i).getPosX()][a.getDis().get(i).getPosY()].setArena_casilla(es[a.getDis().get(i).getPosX()][a.getDis().get(i).getPosY()].getArena_casilla()+a.getDis().get(i).getCantidad());
+        }
+       return es;
+    }
     public void distribuirArena(int i, int sobra, int posix, int posiy){
         if(i==adya.size()){
             ArrayList<Distribucion> daux=new ArrayList<>();
@@ -83,9 +100,12 @@ public class EspacioDeEstados {
             for(int r=0;r<d.size();r++){
                 cantidad+=d.get(r).getCantidad();
                 daux.add(d.get(r));
+               
             }
             boolean comp=false;
             Accion aci=new Accion(1, posix, posiy, daux);
+            Estado es[][]=calcularEstado(aci);
+            Sucesores s=new Sucesores(es,aci);
             for(int a=0; a<acc.size();a++){
                 if(acc.get(a).compara(aci, acc.get(a))==true){
                     comp=true;
@@ -93,11 +113,13 @@ public class EspacioDeEstados {
             }
             if( cantidad==sobrante && comp==false ){//
                 acc.add(aci);
-                System.out.println(aci);
+
+                suc.add(s);
             }
 
         }else {
             Distribucion dis;
+           
 
             for (int j = sobra; j >= 0; j--) {
                 if ((adya.get(i).getArena_casilla() + j) <= max) {
@@ -137,7 +159,10 @@ public class EspacioDeEstados {
             int sobra=estados[posX][posY].getArena_casilla()-K;
             distribuirArena(0, sobra, adya.get(a).getPosX(), adya.get(a).getPosY());
         }
-        System.out.println("Nº de sucesores: "+acc.size());
+        for (int i=0; i<suc.size();i++){
+            suc.get(i).toS();
+        }
+       // NodoArbol nd=new NodoArbol();
         /*
         boolean terminado=true;
         for (int i=0; i<filas;i++){

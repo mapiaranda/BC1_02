@@ -8,7 +8,10 @@ public class Estado {
 	private int posX;
 	private int posY;
 
-	
+	public Estado() {
+
+	}
+
 	public Estado(int id, int arena_casilla, int posX, int posY){
 		this.id=id;
 		this.arena_casilla = arena_casilla;
@@ -60,7 +63,7 @@ public class Estado {
 
 	@Override
 	public String toString() {
-		return "Estado{" +
+		return "Casilla{" +
 				"id=" + id +
 				", arena_casilla=" + arena_casilla +
 				", visitado=" + visitado +

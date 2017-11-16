@@ -29,19 +29,21 @@ public class GenerarTerreno {
         espacio.setMax(datos[3]);
         espacio.setK(datos[2]);
         Estado casi;
-        Problema.estadoInicial=new Estado[espacio.getFilas()][espacio.getColumnas()];
+        problema.estado=new Estado[espacio.getFilas()][espacio.getColumnas()];
         espacio.estados=new Estado[espacio.getFilas()][espacio.getColumnas()];
         int i=0;
         for (int j = 0; j < espacio.getFilas(); j++) { //fila
             for (int k = 0; k < espacio.getColumnas(); k++) { //columna
                 casi=new Estado(i, entrada.nextInt(), j, k);
-                Problema.estadoInicial[j][k]=casi;
+                problema.estado[j][k]=casi;
                 espacio.estados[j][k]=casi;
                 i++;
             }
         }
         espacio.setPosX(datos[0]);
         espacio.setPosY(datos[1]);
+        //NodoArbol n=new NodoArbol(problema, 0, "",0, 0 );
+        //Frontera f=new Frontera(n);
         espacio.adyacentes();
     }
 
@@ -52,7 +54,7 @@ public class GenerarTerreno {
         espacio.setK(espacio.V/espacio.filas*espacio.columnas);
         espacio.setMax((int) (Math.random()*(espacio.V-1))+1); //cantidad máxima que puede almacenar cada casilla
         int total=espacio.V;
-        Problema.estadoInicial=new Estado[espacio.getFilas()][espacio.getColumnas()];
+        problema.estado=new Estado[espacio.getFilas()][espacio.getColumnas()];
         espacio.estados=new Estado[espacio.getFilas()][espacio.getColumnas()];
         int a=0;
         Estado casi;
@@ -60,11 +62,11 @@ public class GenerarTerreno {
             for (int j = 0; j < espacio.getColumnas(); j++) {
                 if(total<espacio.getMax()){
                     casi=new Estado(a,(int) (Math.random()*total), i, j );
-                    Problema.estadoInicial[i][j]=casi;
+                    Problema.estado[i][j]=casi;
                     espacio.estados[i][j]=casi;
                 }else{
                     casi=new Estado(a,(int) (Math.random()*espacio.max), i, j );
-                    Problema.estadoInicial[i][j]=casi;
+                    Problema.estado[i][j]=casi;
                     espacio.estados[i][j]=casi;
                 }
                 a++;
@@ -74,6 +76,8 @@ public class GenerarTerreno {
         }
         espacio.setPosX(2);
         espacio.setPosY(2);
+        NodoArbol n=new NodoArbol(problema, 0, "",0, 0 );
+        Frontera f=new Frontera(n);
         espacio.adyacentes();
 
     }

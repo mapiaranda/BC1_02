@@ -6,8 +6,8 @@ import java.util.PriorityQueue;
 public class Frontera{
 	private PriorityQueue<NodoArbol> frontera;
 	
-	public Frontera(){
-		this.frontera = new PriorityQueue<NodoArbol>();
+	public Frontera(NodoArbol n){
+		this.frontera.add(n);
 	}
 	
 	/**

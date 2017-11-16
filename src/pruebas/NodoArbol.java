@@ -16,7 +16,15 @@ public class NodoArbol implements Comparable<NodoArbol>{
 		this.valor = valor;
 		this.profundidad = profundidad;
 	}
-	
+
+	public NodoArbol(pruebas.Problema problema, int costo, String accion, int valor, int profundidad) {
+		Problema = problema;
+		this.costo = costo;
+		this.accion = accion;
+		this.valor = valor;
+		this.profundidad = profundidad;
+	}
+
 	/**
 	 * 
 	 * @return NodoArbol
