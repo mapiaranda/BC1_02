@@ -9,7 +9,11 @@ public class Accion {
     ArrayList<Distribucion> dis;
 
     public Accion(int costo, int posX, int posY, ArrayList<Distribucion> dis) {
-        this.costo = costo;
+        int cantidad=0;
+        for (int i=0;i<dis.size();i++){
+            cantidad+=dis.get(i).getCantidad();
+        }
+        this.costo = cantidad+1;
         this.posX = posX;
         this.posY = posY;
         this.dis = dis;

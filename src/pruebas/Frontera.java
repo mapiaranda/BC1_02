@@ -1,26 +1,36 @@
 package pruebas;
 
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 
 public class Frontera{
-	private PriorityQueue<NodoArbol> frontera;
+	private PriorityQueue<Nodo> frontera=new PriorityQueue<>(new Comparator<Nodo>() {
+		@Override
+		public int compare(Nodo o1, Nodo o2) {
+			int r=0;
+			if(o1.getValor()> o2.getValor()){
+				r=1;
+			}else if(o2.getValor()>o1.getValor()){
+				r=-1;
+			}
+			return r;
+		}
+	});
 	
-	public Frontera(NodoArbol n){
-		this.frontera.add(n);
+	public Frontera(){
+
 	}
 	
 	/**
 	 * @return frontera
 	 */
-	public PriorityQueue<NodoArbol> getFrontera() {
+	public PriorityQueue<Nodo> getFrontera() {
 		return frontera;
 	}
 	
-	/**
-	 * @param frontera
-	 */
-	public void setFrontera(PriorityQueue<NodoArbol> frontera) {
+
+	public void setFrontera(PriorityQueue<Nodo> frontera) {
 		this.frontera = frontera;
 	}
 
@@ -28,7 +38,7 @@ public class Frontera{
 	 * Inserta nodos en la PriorityQueue
 	 * @param nodo
 	 */
-	public void insertarNodo(NodoArbol nodo){
+	public void insertarNodo(Nodo nodo){
 		this.frontera.offer(nodo);
 	}
 	
@@ -36,7 +46,7 @@ public class Frontera{
 	 * Inserta nodos en la PriorityQueue de una lista que contiene los sucesores de un estado
 	 * @param list
 	 */
-	public void insertarLista(LinkedList<NodoArbol> list){
+	public void insertarLista(LinkedList<Nodo> list){
 		int i = 0;
 		int size = list.size();
 		while(i < size){
@@ -45,7 +55,7 @@ public class Frontera{
 		}
 	}
 
-	public NodoArbol eliminar(){
+	public Nodo eliminar(){
 		return this.frontera.poll();
 	}
 	

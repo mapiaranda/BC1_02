@@ -3,10 +3,10 @@ package pruebas;
 import java.util.Arrays;
 
 public class Sucesores {
-    Estado e[][];
+    Estado e;
     Accion a;
 
-    public Sucesores(Estado[][] e, Accion a) {
+    public Sucesores(Estado e, Accion a) {
         this.e = e;
         this.a = a;
     }
@@ -15,11 +15,11 @@ public class Sucesores {
         this.a = a;
     }
 
-    public Estado[][] getE() {
+    public Estado getE() {
         return e;
     }
 
-    public void setE(Estado[][] e) {
+    public void setE(Estado e) {
         this.e = e;
     }
 
@@ -31,16 +31,11 @@ public class Sucesores {
         this.a = a;
     }
 
-    public void toS() {
-        String estado;
-        System.out.println("");
-        System.out.print("Sucesores{");
-        for (int b = 0; b < e.length; b++) {
-            for (int a = 0; a < e.length; a++) {
-                System.out.print(" "+e[b][a].toString());
-            }
-        }
-
-        System.out.print(", a=" + a + '}');
+    @Override
+    public String toString() {
+        return "Sucesores{" +
+                "e=" + e +
+                ", a=" + a +
+                '}';
     }
 }
