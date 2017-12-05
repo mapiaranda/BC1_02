@@ -8,7 +8,7 @@ public class Accion {
     int posY;
     ArrayList<Distribucion> dis;
 
-    public Accion(int costo, int posX, int posY, ArrayList<Distribucion> dis) {
+    public Accion(int posX, int posY, ArrayList<Distribucion> dis) {
         int cantidad=0;
         for (int i=0;i<dis.size();i++){
             cantidad+=dis.get(i).getCantidad();

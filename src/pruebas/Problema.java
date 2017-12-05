@@ -2,6 +2,8 @@ package pruebas;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Problema {
@@ -36,39 +38,33 @@ public class Problema {
         Scanner entrada = null;
         Estado e=new Estado();
         try {
-            entrada = new Scanner(new File("prueba.txt"));
+            entrada = new Scanner(new File("Problema.dat"));
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
         }
         int [] datos = new int [6];
-
         for (int j = 0; j < 6; j++) {
             datos[j]=entrada.nextInt();
         }
-
-        e.setFilas(datos[4]);
-        e.setColumnas(datos[5]);
-        e.setMax(datos[3]);
-        e.setK(datos[2]);
-
         int i=0;
+        int filas=datos[4];
+        int columnas=datos[5];
         int terreno[][]=new int[datos[4]][datos[5]];
-        for (int j = 0; j < e.getFilas(); j++) { //fila
-            for (int k = 0; k < e.getColumnas(); k++) { //columna
+        for (int j = 0; j < filas; j++) { //fila
+            for (int k = 0; k < columnas; k++) { //columna
                 terreno[j][k]=entrada.nextInt();
                 i++;
             }
         }
-        e.setTerreno(terreno);
-        e.setPosX(datos[0]);
-        e.setPosY(datos[1]);
+        e=new Estado(datos[4], datos[5], terreno, datos[0], datos[1], (datos[5]*datos[4])*datos[2],datos[2], datos[3], terreno[datos[0]][datos[1]]);
         es=e;
         Accion a=null;
         Nodo nodo=new Nodo(0,null,e, "", 0, 0, 0, false);
         Frontera f=new Frontera();
         f.insertarNodo(nodo);
         espacio=new EspacioDeEstados();
-        espacio.adyacentes(f, tipoB, 0);
+
+        espacio.adyacentes(f, tipoB, 0,0,0);
     }
 
     void generarTerrenoRnd(int tipoB){
@@ -80,16 +76,17 @@ public class Problema {
         e.setMax((int) (Math.random()*(e.getV()-1))+1); //cantidad máxima que puede almacenar cada casilla
         int total=e.getV();
         int terreno[][]=new int[e.getFilas()][e.getColumnas()];
-        int a=0;
         Estado casi;
+        int a=1;
         for (int i = 0; i < e.getFilas(); i++) {
             for (int j = 0; j < e.getColumnas(); j++) {
                 if(total<e.getMax()){
                     terreno[i][j]=(int)Math.random()*total;
 
+                }else if(total<e.getMax() && a==e.getFilas()*e.getColumnas() ){
+                    terreno[i][j]=total;
                 }else{
                     terreno[i][j]=(int)Math.random()*e.getMax();
-
                 }
                 a++;
                 total = total - terreno[i][j];
@@ -103,7 +100,26 @@ public class Problema {
         Nodo nodo=new Nodo(0,null,e, "", 0, 0, 0, false);
         Frontera f=new Frontera();
         f.insertarNodo(nodo);
-        espacio.adyacentes(f, tipoB, 0);
+        espacio=new EspacioDeEstados();
+        espacio.adyacentes(f, tipoB, 0,0,0);
 
     }
+//Método para escribir en fichero
+   public static void escribir (FileWriter fw, Nodo n, Accion a) {
+		int [][] terreno = n.getEstado().getTerreno();
+		Estado e=n.getEstado();
+		try {
+		    fw.write(a.toString());
+		    fw.write(e.getPosX()+" "+e.getPosY()+" "+e.getK()+" "+e.getMax()+" "+e.getColumnas()+" "+e.getFilas());
+			//fw.write("\nAccion -> Arriba: "+aux.get_accion_aplicada()[0]+"; Abajo: "+ aux.get_accion_aplicada()[1]+"; Derecha: "+aux.get_accion_aplicada()[2]+"; Izquierda: "+aux.get_accion_aplicada()[3]+"\n");
+			for (int i = 0; i < terreno.length; i++) {
+				for (int j = 0; j < terreno.length; j++) {
+					fw.write(" " + terreno[i][j]);
+				}
+				fw.write("\n");
+			}
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+	}
 }

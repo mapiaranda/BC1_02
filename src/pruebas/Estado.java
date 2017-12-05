@@ -1,5 +1,7 @@
 package pruebas;
 
+import java.util.Arrays;
+
 public class Estado {
 	public int filas;
 	public int columnas;
@@ -10,7 +12,6 @@ public class Estado {
 	public int V; // cantidad de Arena que va haber en todo el tablero
 	public int K; // cantidad de arena que va a haber en cada casilla
 	public int max; // cantidad máxima que almacena cada casilla
-	private int id; // variable que almacena un id de cada casilla
 	private int arena_casilla; //almacena la cantidad de arena de cada casilla
 
 	public int[][] getTerreno() {
@@ -85,12 +86,7 @@ public class Estado {
 
 	}
 
-	public Estado(int id, int arena_casilla, int posX, int posY){
-		this.id=id;
-		this.arena_casilla = arena_casilla;
-		this.posX=posX;
-		this.posY=posY;
-	}
+
 
 	public int getPosX() {
 		return posX;
@@ -108,15 +104,6 @@ public class Estado {
 		this.posY = posY;
 	}
 
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	public int getArena_casilla() {
 		return arena_casilla;
 	}
@@ -130,12 +117,12 @@ public class Estado {
 		return "Estado{" +
 				"filas=" + filas +
 				", columnas=" + columnas +
+				", terreno=" + Arrays.toString(terreno) +
 				", posX=" + posX +
 				", posY=" + posY +
 				", V=" + V +
 				", K=" + K +
 				", max=" + max +
-				", id=" + id +
 				", arena_casilla=" + arena_casilla +
 				'}';
 	}
