@@ -15,16 +15,23 @@ public class Estrategia {
 
         generar.rellenarTableroFichero(tipoB, prof_max);
         cola=generar.getEspacio().Busqueda_Acotada(generar,tipoB,prof_max);
+        System.out.println("Profundidad: "+prof_max);
         while(!cola.isEmpty() && cola!=null ){
             nodo=cola.poll();
             Accion a=nodo.getAcc();
-            if(nodo.getAccion()!=null){
-                costeTotal+=nodo.getCosto();
+            if(nodo.getAcc()!=null){
+                costeTotal+=nodo.getAcc().getCosto();
             }
-            System.out.println("accion estrategia "+a.toString());
-            Problema.escribir(nodo, a);
-            escribirCoste=true;
+           // System.out.println("accion estrategia "+a.toString());
+            if(nodo.getPadre()!=null){
+                System.out.println("Accion: "+a.toString());
+                System.out.println(Estado.imp_terrain(nodo.getEstado().getTerreno()));
+                Problema.escribir(nodo, a, escribirCoste);
+                escribirCoste=true;
+            }
+
         }
+        System.out.println("Costo: "+costeTotal);
         if(escribirCoste==true){
             Problema.escribirCoste(costeTotal);
         }

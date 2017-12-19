@@ -77,49 +77,42 @@ public class EspacioDeEstados {
     public Queue<Nodo> Busqueda_Acotada(Problema prob, int tipoB, int prof_max) throws Exception {
         Frontera f = new Frontera();
         Hashtable<String,Nodo> visitados = new Hashtable<String,Nodo>();
-        Nodo nodo_inicial=new Nodo(prob.encriptarMD5(prob.getEs()), null, prob.getEs(), "",null, 0,0,0);
+        Nodo nodo_inicial=new Nodo(prob.encriptarMD5(prob.getEs()), null, prob.getEs(), "",null, 0,esObjetivo(prob.getEs()),0);
         visitados.put(nodo_inicial.getId(), nodo_inicial);
         f.insertarNodo(nodo_inicial);
+        Nodo nodoActual = new Nodo();
         boolean solucion=false;
         while(!solucion && !f.esVacia()){
-            nodo_inicial=f.getFrontera().poll();
-            //nodo_inicial=f.getFrontera().poll();
-            System.out.println("PosXY"+nodo_inicial.getEstado().getPosX()+nodo_inicial.getEstado().getPosY());
-            for (int i=0; i<nodo_inicial.getEstado().getTerreno().length;i++){
-                for (int r=0; r<nodo_inicial.getEstado().getTerreno().length;r++){
-                    System.out.print(nodo_inicial.getEstado().getTerreno()[i][r]+" ");
-                }
-                System.out.println("");
-            }
-
-            if(Problema.Solucion(nodo_inicial.getEstado().getTerreno())==true){
+            nodoActual=f.getFrontera().remove();
+            if(Problema.Solucion(nodoActual.getEstado().getTerreno())==true){
                 solucion=true;
             }else{
-                if(nodo_inicial.getProfundidad()<prof_max){
-                    calcularAdya(nodo_inicial.getEstado());
-                    //System.out.println("accion en metodo "+nodo_inicial.getAcc());
-                    ArrayList<Sucesores> suc=CalcularSucesores(nodo_inicial);
-
-                    ArrayList<Nodo> lista_nodos=CrearNodos(prob, suc, nodo_inicial, tipoB, prof_max);
-
+                if(nodoActual.getProfundidad()<prof_max){
+                    calcularAdya(nodoActual.getEstado());
+                    ArrayList<Sucesores> suc=CalcularSucesores(nodoActual);
+                    ArrayList<Nodo> lista_nodos=CrearNodos(prob, suc, nodoActual, tipoB, prof_max);
                     f.insertarListaNodos(lista_nodos, visitados);
-                    // System.out.println("tamaño cola "+f.getFrontera().size());
                 }
             }
         }
         if(solucion==true){
-            System.out.println("nodo inicaaaal "+nodo_inicial.toString());
-            return CreaSolucion(nodo_inicial);
+
+            return CreaSolucion(nodoActual);
         }else{
 
             return null;
         }
     }
     public Queue<Nodo> CreaSolucion(Nodo nodo_actual){
-        Queue<Nodo> cola = new LinkedBlockingQueue<>();
+        Stack<Nodo> pila = new Stack<Nodo>();
+        Queue<Nodo> cola = new LinkedBlockingQueue<Nodo>();
+
         while (nodo_actual != null) {
-            cola.add(nodo_actual);
+            pila.add(nodo_actual);
             nodo_actual = nodo_actual.getPadre();
+        }
+        while (!pila.isEmpty()) {
+            cola.add(pila.pop());
         }
 
         return cola;
@@ -148,7 +141,7 @@ public class EspacioDeEstados {
                 switch (tipoB){
                     case 0:
                         //Anchura
-                        valor=nodo_acutal.getProfundidad()+1;
+                        valor=profundidad;
                         break;
                     case 1:
                         //Profundidad
@@ -168,7 +161,7 @@ public class EspacioDeEstados {
                         break;
                 }
 
-                Nodo n = new Nodo(pro.encriptarMD5(suc.get(i).getE()),nodo_acutal,suc.get(i).getE(), nodo_acutal.getAccion(),suc.get(i).getA(), suc.get(i).getA().getCosto(),valor, profundidad );
+                Nodo n = new Nodo(pro.encriptarMD5(suc.get(i).getE()),nodo_acutal,suc.get(i).getE(), nodo_acutal.getAccion(),suc.get(i).getA(), nodo_acutal.getCosto()+suc.get(i).getA().getCosto(),valor, profundidad );
                 lista_nodo.add(n);
             } catch (Exception e1) {
                 e1.printStackTrace();

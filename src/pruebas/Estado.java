@@ -94,14 +94,16 @@ public class Estado {
 	public void setPosY(int posY) {
 		this.posY = posY;
 	}
-	public String imp_terrain(int[][]terrain){
+    public static String imp_terrain(int[][]terrain){
 		String tee="";
 		for (int i = 0; i < terrain.length; i++) {
 			for (int j = 0; j <terrain.length; j++) {
-				tee+=terrain[i][j];
+				System.out.print(terrain[i][j]+" ");
 			}
+			System.out.println("");
 
 		}
+
 	return tee;
 	}
 	public int getArena_casilla() {

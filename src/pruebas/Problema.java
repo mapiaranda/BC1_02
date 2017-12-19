@@ -123,22 +123,17 @@ public class Problema {
 
     }
 //Método para escribir en fichero
-   public static void escribir (Nodo n, Accion a) throws IOException {
-        FileWriter fw=new FileWriter("solucion.txt");
+   public static void escribir (Nodo n, Accion a, boolean esc) throws IOException {
+
+        FileWriter fw=new FileWriter("solucion.txt", esc);
        BufferedWriter bw=new BufferedWriter(fw);
 		int [][] terreno = n.getEstado().getTerreno();
 		Estado e=n.getEstado();
-       //System.out.println("Accion da"+a.toString());
+
        try {
 		    bw.write(a.toString());
-		    bw.write(e.getPosX()+" "+e.getPosY()+" "+e.getK()+" "+e.getMax()+" "+e.getColumnas()+" "+e.getFilas());
-			//fw.write("\nAccion -> Arriba: "+aux.get_accion_aplicada()[0]+"; Abajo: "+ aux.get_accion_aplicada()[1]+"; Derecha: "+aux.get_accion_aplicada()[2]+"; Izquierda: "+aux.get_accion_aplicada()[3]+"\n");
-			for (int i = 0; i < terreno.length; i++) {
-				for (int j = 0; j < terreno.length; j++) {
-					bw.write(" " + terreno[i][j]);
-				}
-				bw.write("\n");
-			}
+		    //bw.write(e.getPosX()+" "+e.getPosY()+" "+e.getK()+" "+e.getMax()+" "+e.getColumnas()+" "+e.getFilas());
+
 			bw.close();
 			fw.close();
 		} catch (IOException ex) {
@@ -147,7 +142,10 @@ public class Problema {
 	}
 	public static void escribirCoste(int costeTotal) throws IOException {
         FileWriter fw=new FileWriter("solucionCoste.txt");
-        fw.write("Coste total: "+costeTotal);
+        BufferedWriter bw=new BufferedWriter(fw);
+        bw.write("Coste total: "+costeTotal);
+        bw.close();
+        fw.close();
     }
 
 

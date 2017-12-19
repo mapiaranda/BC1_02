@@ -66,12 +66,12 @@ public class Accion {
 
     @Override
     public String toString() {
-        return "Accion{" +
+        return "{" +
 
                 "( " + posX +
                 ", " + posY +
                 "), " + dis +
-                ", costo=" + costo +
+                "," + costo +
                 '}';
     }
 }

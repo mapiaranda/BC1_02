@@ -77,22 +77,22 @@ public class Nodo implements Comparable<Nodo>{
 	}
 	
 	/**
-	 * 
+	 *
 	 * @return Terreno
 	 */
 
 	public int getCosto() {
 		return costo;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param costo
 	 */
 	public void setCosto(int costo) {
 		this.costo = costo;
 	}
-	
+
 
 	
 	/**
@@ -150,7 +150,7 @@ public class Nodo implements Comparable<Nodo>{
 				", valor=" + valor +
 				", profundidad=" + profundidad +
 				", visitado=" + visitado +
-				", acc=" + acc +
+				", acc=" + acc.toString() +
 				'}';
 	}
 }
