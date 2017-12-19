@@ -3,7 +3,7 @@ package pruebas;
 import java.util.ArrayList;
 
 public class Nodo implements Comparable<Nodo>{
-	private int id;
+	private String id;
 	private Nodo padre; //información del nodo padre
 	private Estado estado;
 	private String accion; //arriba, abajo, derecha, izq
@@ -11,23 +11,38 @@ public class Nodo implements Comparable<Nodo>{
 	private int valor; //valor por el cual se ordenará la frontera
 	private int profundidad; //valor de la profundidad
 	private boolean visitado;
+	private Accion acc;
 
 
-	public Nodo(int id, Nodo padre, Estado estado, String accion, int costo, int valor, int profundidad, boolean visitado) {
+	public Nodo(String id, Nodo padre, Estado estado, String accion, Accion acc, int costo, int valor, int profundidad) {
 		this.id=id;
 		this.padre = padre;
 		this.estado = estado;
 		this.accion = accion;
 		this.costo = costo;
 		this.valor = valor;
+		this.acc=acc;
 		this.profundidad = profundidad;
-		this.visitado = visitado;
 	}
 
 	public Nodo() {
 	}
 
+	public Accion getAcc() {
+		return acc;
+	}
 
+	public void setAcc(Accion acc) {
+		this.acc = acc;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	public String getAccion() {
 		return accion;
@@ -112,29 +127,30 @@ public class Nodo implements Comparable<Nodo>{
 		this.profundidad = profundidad;
 	}
 
-	/**
-	 * Compara el valor de los nodos para la introducción ordenada en la cola con prioridad
-	 * @param nodo
-	 * @return int
-	 */
-	public int compareTo(Nodo nodo){
-        int r = 0;
-        if (nodo.getValor() < getValor())
-            r = 1;
-        else if(nodo.getValor() > getValor())
-        	r = -1;
-        
-        return r;
-    }
+	public int compareTo(Nodo o) {
+		int resultado = 0;
+		if (this.valor < o.valor)
+			resultado = -1;
+		else if (this.valor > o.valor)
+			resultado = 1;
+		else {
+			resultado = 0;
+		}
+		return resultado;
+	}
 
 	@Override
 	public String toString() {
 		return "Nodo{" +
-				"padre=" + padre +
+				"id='" + id + '\'' +
+				", padre=" + padre +
+				", estado=" + estado +
 				", accion='" + accion + '\'' +
 				", costo=" + costo +
 				", valor=" + valor +
 				", profundidad=" + profundidad +
+				", visitado=" + visitado +
+				", acc=" + acc +
 				'}';
 	}
 }

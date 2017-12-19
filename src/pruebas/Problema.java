@@ -1,9 +1,9 @@
 package pruebas;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.security.MessageDigest;
+import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Scanner;
 
 public class Problema {
@@ -32,9 +32,15 @@ public class Problema {
         Problema.espacio = espacio;
     }
 
+    public  Estado getEs() {
+        return es;
+    }
 
+    public void setEs(Estado es) {
+        Problema.es = es;
+    }
 
-    void rellenarTableroFichero(int tipoB){
+    void rellenarTableroFichero(int tipoB, int prof_max){
         Scanner entrada = null;
         Estado e=new Estado();
         try {
@@ -59,12 +65,17 @@ public class Problema {
         e=new Estado(datos[4], datos[5], terreno, datos[0], datos[1], (datos[5]*datos[4])*datos[2],datos[2], datos[3], terreno[datos[0]][datos[1]]);
         es=e;
         Accion a=null;
-        Nodo nodo=new Nodo(0,null,e, "", 0, 0, 0, false);
+        Nodo nodo= null;
+        try {
+            nodo = new Nodo(encriptarMD5(e),null,e, "",null, 0, 0, 0);
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
         Frontera f=new Frontera();
         f.insertarNodo(nodo);
         espacio=new EspacioDeEstados();
-
-        espacio.adyacentes(f, tipoB, 0,0,0);
+        //Hashtable<String,Nodo> visitados = new Hashtable<String,Nodo>();
+        //espacio.adyacentes(f, tipoB, 0,0,0, visitados, this, 9);
     }
 
     void generarTerrenoRnd(int tipoB){
@@ -97,29 +108,72 @@ public class Problema {
         e.setPosX(2);
         e.setPosY(2);
         es=e;
-        Nodo nodo=new Nodo(0,null,e, "", 0, 0, 0, false);
+        Nodo nodo= null;
+        try {
+            nodo = new Nodo(encriptarMD5(e),null,e, "", null,0, 0, 0);
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
         Frontera f=new Frontera();
         f.insertarNodo(nodo);
+        Hashtable<String,Nodo> visitados = new Hashtable<String,Nodo>();
+        visitados.put(nodo.getId(), nodo);
         espacio=new EspacioDeEstados();
-        espacio.adyacentes(f, tipoB, 0,0,0);
+
 
     }
 //Método para escribir en fichero
-   public static void escribir (FileWriter fw, Nodo n, Accion a) {
+   public static void escribir (Nodo n, Accion a) throws IOException {
+        FileWriter fw=new FileWriter("solucion.txt");
+       BufferedWriter bw=new BufferedWriter(fw);
 		int [][] terreno = n.getEstado().getTerreno();
 		Estado e=n.getEstado();
-		try {
-		    fw.write(a.toString());
-		    fw.write(e.getPosX()+" "+e.getPosY()+" "+e.getK()+" "+e.getMax()+" "+e.getColumnas()+" "+e.getFilas());
+       //System.out.println("Accion da"+a.toString());
+       try {
+		    bw.write(a.toString());
+		    bw.write(e.getPosX()+" "+e.getPosY()+" "+e.getK()+" "+e.getMax()+" "+e.getColumnas()+" "+e.getFilas());
 			//fw.write("\nAccion -> Arriba: "+aux.get_accion_aplicada()[0]+"; Abajo: "+ aux.get_accion_aplicada()[1]+"; Derecha: "+aux.get_accion_aplicada()[2]+"; Izquierda: "+aux.get_accion_aplicada()[3]+"\n");
 			for (int i = 0; i < terreno.length; i++) {
 				for (int j = 0; j < terreno.length; j++) {
-					fw.write(" " + terreno[i][j]);
+					bw.write(" " + terreno[i][j]);
 				}
-				fw.write("\n");
+				bw.write("\n");
 			}
+			bw.close();
+			fw.close();
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
 	}
+	public static void escribirCoste(int costeTotal) throws IOException {
+        FileWriter fw=new FileWriter("solucionCoste.txt");
+        fw.write("Coste total: "+costeTotal);
+    }
+
+
+        public String encriptarMD5( Estado estado) throws Exception{
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            String tee="";
+            for (int i = 0; i < estado.getTerreno().length; i++) {
+                for (int j = 0; j <estado.getTerreno().length; j++) {
+                    tee+=estado.getTerreno()[i][j];
+                }
+            }
+            String mensaje=String.valueOf(estado.getPosX())+String.valueOf(estado.getPosY())+tee;
+            //System.out.println("mensaje "+mensaje);
+            byte[] bytes = md.digest(mensaje.getBytes());
+            int size = bytes.length;
+            StringBuffer h = new StringBuffer(size);
+            for (int i = 0; i < size; i++) {
+                int u = bytes[i] & 255;
+                if (u < 16) {
+                    h.append("0" + Integer.toHexString(u));
+                } else {
+                    h.append(Integer.toHexString(u));
+                }
+            }
+            return h.toString();
+
+        }
+
 }

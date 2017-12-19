@@ -8,7 +8,6 @@ public class Estado {
 	public int [][] terreno;
 	public int posX;
 	public int posY;
-	public static int contadorSucesores;
 	public int V; // cantidad de Arena que va haber en todo el tablero
 	public int K; // cantidad de arena que va a haber en cada casilla
 	public int max; // cantidad máxima que almacena cada casilla
@@ -48,14 +47,6 @@ public class Estado {
 
 	public void setColumnas(int columnas) {
 		this.columnas = columnas;
-	}
-
-	public int getContadorSucesores() {
-		return contadorSucesores;
-	}
-
-	public void setContadorSucesores(int contadorSucesores) {
-		Estado.contadorSucesores = contadorSucesores;
 	}
 
 	public int getV() {
@@ -103,7 +94,16 @@ public class Estado {
 	public void setPosY(int posY) {
 		this.posY = posY;
 	}
+	public String imp_terrain(int[][]terrain){
+		String tee="";
+		for (int i = 0; i < terrain.length; i++) {
+			for (int j = 0; j <terrain.length; j++) {
+				tee+=terrain[i][j];
+			}
 
+		}
+	return tee;
+	}
 	public int getArena_casilla() {
 		return arena_casilla;
 	}
@@ -114,10 +114,11 @@ public class Estado {
 
 	@Override
 	public String toString() {
+		String te = imp_terrain(terreno);
 		return "Estado{" +
 				"filas=" + filas +
 				", columnas=" + columnas +
-				", terreno=" + Arrays.toString(terreno) +
+				", terreno=" + te +
 				", posX=" + posX +
 				", posY=" + posY +
 				", V=" + V +

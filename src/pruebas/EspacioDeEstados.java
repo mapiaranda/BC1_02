@@ -1,15 +1,18 @@
 package pruebas;
 
-import java.util.ArrayList;
+import java.util.*;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class EspacioDeEstados {
-    ArrayList<Estado> adya=new ArrayList<>();
+
     ArrayList<Accion> acc=new ArrayList<>();
     ArrayList<Distribucion> d=new ArrayList<>();
     ArrayList<Distribucion>distri = new ArrayList<>();
+    ArrayList<Sucesores>lista_sucesores=new ArrayList<>();
+    ArrayList<Estado> lista_adya=new ArrayList<>();
     int sobrante;
-    ArrayList<Nodo>nodosvisitados=new ArrayList<>();
-    ArrayList<Sucesores> suc=new ArrayList<>();
+
+
 
     public EspacioDeEstados() {
     }
@@ -32,8 +35,8 @@ public class EspacioDeEstados {
         es=new Estado(e.getFilas(), e.getColumnas(), terreno, posx, posy, e.getV(), e.getK(), e.getMax(), terreno[posx][posy]);
        return es;
     }
-    public void distribuirArena(int i, int sobra, int posix, int posiy, Estado e, Estado padre){
-        if(i==adya.size()){
+    public void distribuirArena(int i, int sobra, int posix, int posiy, Estado e){
+        if(i==lista_adya.size()){
             ArrayList<Distribucion> daux=new ArrayList<>();
             int cantidad=0;
             for(int r=0;r<d.size();r++){
@@ -48,34 +51,204 @@ public class EspacioDeEstados {
                     comp=true;
                 }
             }
-            if( cantidad==sobrante && comp==false ){
+
+            if( cantidad==sobrante  && comp==false){
                 Estado est=calcularEstado(aci, e, posix, posiy, cantidad);
                 Sucesores s=new Sucesores(est,aci);
-
                 acc.add(aci);
-                suc.add(s);
+                lista_sucesores.add(s);
             }
         }else {
             Distribucion dis;
             for (int j = sobra; j >= 0; j--) {
-                if ((adya.get(i).getArena_casilla() + j) <= e.getMax()) {
-                    dis = new Distribucion(j, adya.get(i).getPosX(), adya.get(i).getPosY());
+                if ((lista_adya.get(i).getArena_casilla() + j) <= e.getMax()) {
+                    dis = new Distribucion(j, lista_adya.get(i).getPosX(), lista_adya.get(i).getPosY());
                     d.add(dis);
                 }else{
-                    dis=new Distribucion(0, adya.get(i).getPosX(), adya.get(i).getPosY());
+                    dis=new Distribucion(0, lista_adya.get(i).getPosX(), lista_adya.get(i).getPosY());
                     d.add(dis);
                 }
-                distribuirArena(i + 1, sobra - dis.getCantidad(), posix, posiy, e, padre);
+                distribuirArena(i + 1, sobra - dis.getCantidad(), posix, posiy, e);
                 d.remove(i);
             }
         }
+
     }
-    public void adyacentes(Frontera f, int tipoB, int id, int valor, int profundidad){
+    public Queue<Nodo> Busqueda_Acotada(Problema prob, int tipoB, int prof_max) throws Exception {
+        Frontera f = new Frontera();
+        Hashtable<String,Nodo> visitados = new Hashtable<String,Nodo>();
+        Nodo nodo_inicial=new Nodo(prob.encriptarMD5(prob.getEs()), null, prob.getEs(), "",null, 0,0,0);
+        visitados.put(nodo_inicial.getId(), nodo_inicial);
+        f.insertarNodo(nodo_inicial);
+        boolean solucion=false;
+        while(!solucion && !f.esVacia()){
+            nodo_inicial=f.getFrontera().poll();
+            //nodo_inicial=f.getFrontera().poll();
+            System.out.println("PosXY"+nodo_inicial.getEstado().getPosX()+nodo_inicial.getEstado().getPosY());
+            for (int i=0; i<nodo_inicial.getEstado().getTerreno().length;i++){
+                for (int r=0; r<nodo_inicial.getEstado().getTerreno().length;r++){
+                    System.out.print(nodo_inicial.getEstado().getTerreno()[i][r]+" ");
+                }
+                System.out.println("");
+            }
+
+            if(Problema.Solucion(nodo_inicial.getEstado().getTerreno())==true){
+                solucion=true;
+            }else{
+                if(nodo_inicial.getProfundidad()<prof_max){
+                    calcularAdya(nodo_inicial.getEstado());
+                    //System.out.println("accion en metodo "+nodo_inicial.getAcc());
+                    ArrayList<Sucesores> suc=CalcularSucesores(nodo_inicial);
+
+                    ArrayList<Nodo> lista_nodos=CrearNodos(prob, suc, nodo_inicial, tipoB, prof_max);
+
+                    f.insertarListaNodos(lista_nodos, visitados);
+                    // System.out.println("tamaño cola "+f.getFrontera().size());
+                }
+            }
+        }
+        if(solucion==true){
+            System.out.println("nodo inicaaaal "+nodo_inicial.toString());
+            return CreaSolucion(nodo_inicial);
+        }else{
+
+            return null;
+        }
+    }
+    public Queue<Nodo> CreaSolucion(Nodo nodo_actual){
+        Queue<Nodo> cola = new LinkedBlockingQueue<>();
+        while (nodo_actual != null) {
+            cola.add(nodo_actual);
+            nodo_actual = nodo_actual.getPadre();
+        }
+
+        return cola;
+    }
+    public int esObjetivo(Estado est) {
+        int heuristica = 0;
+
+        for (int i = 0; i < est.getTerreno().length; i++) {
+            for (int j = 0; j < est.getTerreno()[0].length; j++) {
+                if (est.getTerreno()[i][j] != est.getK())
+                    heuristica++;
+            }
+        }
+        return heuristica;
+    }
+    public ArrayList<Nodo> CrearNodos(Problema pro, ArrayList<Sucesores>suc, Nodo nodo_acutal, int tipoB, int prof_max){
+        ArrayList<Nodo> lista_nodo=new ArrayList<>();
+
+        int profundidad=nodo_acutal.getProfundidad()+1;
+        for(int i=0; i<suc.size(); i++){
+            //System.out.println("Accion sucesor "+suc.get(i).getA());
+            int heuristica=esObjetivo(suc.get(i).getE());
+            int coste=suc.get(i).getA().getCosto();
+            try {
+                int valor=0;
+                switch (tipoB){
+                    case 0:
+                        //Anchura
+                        valor=nodo_acutal.getProfundidad()+1;
+                        break;
+                    case 1:
+                        //Profundidad
+                        valor=prof_max-nodo_acutal.getProfundidad();
+                        break;
+                    case 2:
+                        //Coste uniforme
+                        valor=nodo_acutal.getCosto()-coste;
+                        break;
+                    case 3:
+                        //Heuristica
+                        valor=nodo_acutal.getCosto()+coste+heuristica;
+                        break;
+                    case 4:
+                        //Voraz
+                        valor=heuristica;
+                        break;
+                }
+
+                Nodo n = new Nodo(pro.encriptarMD5(suc.get(i).getE()),nodo_acutal,suc.get(i).getE(), nodo_acutal.getAccion(),suc.get(i).getA(), suc.get(i).getA().getCosto(),valor, profundidad );
+                lista_nodo.add(n);
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        }
+        return lista_nodo;
+    }
+
+    public void calcularAdya(Estado estado_actual){
+        lista_adya.clear();
+        if((estado_actual.getPosX()+1)<estado_actual.getFilas() ){
+            Estado ca=new Estado(estado_actual.getFilas(), estado_actual.getColumnas(),estado_actual.getTerreno(),estado_actual.getPosX()+1,estado_actual.getPosY(),estado_actual.getV(), estado_actual.getK(), estado_actual.getMax(),estado_actual.terreno[estado_actual.getPosX()+1][estado_actual.getPosY()]);
+            lista_adya.add(ca);
+        }if((estado_actual.getPosX()-1)>=0){
+            Estado ca=new Estado(estado_actual.getFilas(), estado_actual.getColumnas(),estado_actual.getTerreno(),estado_actual.getPosX()-1,estado_actual.getPosY(),estado_actual.getV(), estado_actual.getK(), estado_actual.getMax(),estado_actual.terreno[estado_actual.getPosX()-1][estado_actual.getPosY()]);
+            lista_adya.add(ca);
+        }if((estado_actual.getPosY()+1)<estado_actual.getColumnas()){
+            Estado ca=new Estado(estado_actual.getFilas(), estado_actual.getColumnas(),estado_actual.getTerreno(),estado_actual.getPosX(),estado_actual.getPosY()+1,estado_actual.getV(), estado_actual.getK(), estado_actual.getMax(),estado_actual.terreno[estado_actual.getPosX()][estado_actual.getPosY()+1]);
+            lista_adya.add(ca);
+        }if((estado_actual.getPosY()-1)>=0){
+            Estado ca=new Estado(estado_actual.getFilas(), estado_actual.getColumnas(),estado_actual.getTerreno(),estado_actual.getPosX(),estado_actual.getPosY()-1,estado_actual.getV(), estado_actual.getK(), estado_actual.getMax(),estado_actual.getTerreno()[estado_actual.getPosX()][estado_actual.getPosY()-1]);
+            lista_adya.add(ca);
+        }
+    }
+    public ArrayList<Sucesores> CalcularSucesores( Nodo nodo_actual){
+        lista_sucesores.clear();
+
+        int sobra=0;
+
+        for(int a=0; a<lista_adya.size();a++){
+            d.clear();
+            acc.clear();
+            distri.clear();
+            sobra=nodo_actual.getEstado().getArena_casilla()-nodo_actual.getEstado().getK();
+            sobrante=nodo_actual.getEstado().getArena_casilla()-nodo_actual.getEstado().getK();
+            if(sobrante>0){
+                distribuirArena(0, sobra, lista_adya.get(a).getPosX(), lista_adya.get(a).getPosY(), nodo_actual.getEstado());
+            }else{
+                for (int m=0;m<lista_adya.size();m++){
+                    Distribucion d=new Distribucion(0,lista_adya.get(m).getPosX(), lista_adya.get(m).getPosY() );
+                    distri.add(d);
+                }
+                Accion accio=new Accion(lista_adya.get(a).getPosX(), lista_adya.get(a).getPosY(), distri);
+                Estado estad=new Estado(lista_adya.get(a).getFilas(), lista_adya.get(a).getColumnas(), lista_adya.get(a).getTerreno(), lista_adya.get(a).getPosX(),lista_adya.get(a).getPosY(), lista_adya.get(a).getV(), lista_adya.get(a).getK(), lista_adya.get(a).getMax(), lista_adya.get(a).getArena_casilla());
+                Sucesores s=new Sucesores(estad, accio);
+                lista_sucesores.add(s);
+            }
+
+        }
+        return lista_sucesores;
+    }
+    public String CalcularAccion(ArrayList<Sucesores>suce, Nodo nodo_actual) {
+        String accion=null;
+        for (int i = 0; i < suce.size(); i++) {
+
+            if (suce.get(i).getA().getPosX() < nodo_actual.getEstado().getPosX()) {
+                accion = "arriba";
+            } else if (suce.get(i).getA().getPosX() > nodo_actual.getEstado().getPosX()) {
+                accion = "abajo";
+            } else if (suce.get(i).getA().getPosY() > nodo_actual.getEstado().getPosY()) {
+                accion = "derecha";
+            } else {
+                accion = "izquierda";
+            }
+
+        }
+        return accion;
+    }
+    /*
+    public void adyacentes(Frontera f, int tipoB, int id, int valor, int profundidad, Hashtable<String, Nodo> visitados, Problema pro, int prof_max){
         id++;
         Busqueda b=new Busqueda();
         Nodo nodoo=b.busqueda(f.getFrontera());
-        if(nodoo==null){
-            System.out.println("SOLUCIÓN COMPLETA");
+        if(nodoo==null ){
+            if(profundidad>=prof_max){
+                System.out.println("MAXIMO");
+            }else{
+                System.out.println("SOLUCIÓN COMPLETA");
+            }
+
         }else{
             Estado e=nodoo.getEstado();
             System.out.println(" ");
@@ -93,39 +266,8 @@ public class EspacioDeEstados {
             int columnas=e.getColumnas();
             int terreno[][]=e.getTerreno();
 
-            if((e.getPosX()+1)<e.getFilas() ){
-                Estado ca=new Estado(filas, columnas,terreno,e.getPosX()+1,e.getPosY(),e.getV(), e.getK(), e.getMax(),e.terreno[e.getPosX()+1][e.getPosY()]);
-                adya.add(ca);
-            }if((e.getPosX()-1)>=0){
-                Estado ca=new Estado(filas, columnas,terreno,e.getPosX()-1,e.getPosY(),e.getV(), e.getK(), e.getMax(),e.terreno[e.getPosX()-1][e.getPosY()]);
-                adya.add(ca);
-            }if((e.getPosY()+1)<e.getColumnas()){
-                Estado ca=new Estado(filas, columnas,terreno,e.getPosX(),e.getPosY()+1,e.getV(), e.getK(), e.getMax(),e.terreno[e.getPosX()][e.getPosY()+1]);
-                adya.add(ca);
-            }if((e.getPosY()-1)>=0){
-                Estado ca=new Estado(filas, columnas,terreno,e.getPosX(),e.getPosY()-1,e.getV(), e.getK(), e.getMax(),e.terreno[e.getPosX()][e.getPosY()-1]);
-                adya.add(ca);
-            }
-            suc.clear();
-            acc.clear();
-
-            for(int a=0; a<adya.size();a++){
-                sobrante=e.getArena_casilla()-e.getK();
-                if(sobrante>0){
-                    distribuirArena(0, sobrante, adya.get(a).getPosX(), adya.get(a).getPosY(), e,nodoo.getPadre().getEstado());
-                }else{
-                        for (int m=0;m<adya.size();m++){
-                            Distribucion d=new Distribucion(0,adya.get(m).getPosX(), adya.get(m).getPosY() );
-                            distri.add(d);
-                        }
-                        Accion accio=new Accion(adya.get(a).getPosX(), adya.get(a).getPosY(), distri);
-                        Estado estad=new Estado(adya.get(a).getFilas(), adya.get(a).getColumnas(), adya.get(a).getTerreno(), adya.get(a).getPosX(),adya.get(a).getPosY(), adya.get(a).getV(), adya.get(a).getK(), adya.get(a).getMax(), adya.get(a).getArena_casilla());
-                        Sucesores s=new Sucesores(estad, accio);
-                        suc.add(s);
-                }
-
-            }
-
+            profundidad=nodoo.getProfundidad()+1;
+            System.out.println("profundidaaa "+profundidad);
             for (int i=0; i<suc.size();i++){
                 String accion;
                 if(suc.get(i).getA().getPosX()<e.getPosX()){
@@ -139,9 +281,8 @@ public class EspacioDeEstados {
                 }
                 switch (tipoB){
                     case 0:
-                        valor=nodoo.getProfundidad()+1;
-                        profundidad=nodoo.getProfundidad()+1;
-                        //valor=valor+1;
+                        valor=nodoo.getProfundidad();
+                      //valor=valor+1;
                         break;
                     case 1:
                         valor=valor+1;
@@ -154,16 +295,23 @@ public class EspacioDeEstados {
                         break;
                 }
 
-                Nodo n=new Nodo(id,nodoo,suc.get(i).getE(), accion, suc.get(i).getA().getCosto(),valor, profundidad, false );
-                if(b.comprobarNodo(nodosvisitados, n)==false){
-                    nodosvisitados.add(n);
-                    f.insertarNodo(n);
+                Nodo n= null;
+
+                    try {
+                        n = new Nodo(pro.encriptarMD5(suc.get(i).getE()),nodoo,suc.get(i).getE(), accion, suc.get(i).getA().getCosto(),valor, profundidad, false );
+                    } catch (Exception e1) {
+                        e1.printStackTrace();
+                    }
+                    visitados=b.comprobarNodo(visitados, n, tipoB, f);
                 }
 
-            }
-            adyacentes(f,tipoB, id, valor, profundidad);
+
+
+            adyacentes(f,tipoB, id, valor, profundidad, visitados,pro, prof_max);
         }
 
-        }
-    }
+        }*/
+
+
+}
 

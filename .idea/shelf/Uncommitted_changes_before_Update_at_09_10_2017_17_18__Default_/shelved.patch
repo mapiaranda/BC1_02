@@ -1,0 +1,67 @@
+Index: prueba.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>2 3 3 4 6\n7 8 9\n10 11 12\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- prueba.txt	(date 1507560136000)
++++ prueba.txt	(revision )
+@@ -1,3 +1,3 @@
+-2 3 3 4 6
++2 1 3 2 3
+ 7 8 9
+ 10 11 12
+Index: src/pruebas/Tractor.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package pruebas;\n\npublic class Tractor {\n\t\n\tint posX; // posición de la fila\n\tint posY; // posición de la columna\n\t\n\tTractor(int posX, int posY){\n\t\tthis.posX = posX;\n\t\tthis. posY = posY;\n\t}\n\n\tpublic int getPosX() {\n\t\treturn posX;\n\t}\n\n\tpublic void setPosX(int posX) {\n\t\tthis.posX = posX;\n\t}\n\n\tpublic int getPosY() {\n\t\treturn posY;\n\t}\n\n\tpublic void setPosY(int posY) {\n\t\tthis.posY = posY;\n\t}\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/pruebas/Tractor.java	(date 1507560136000)
++++ src/pruebas/Tractor.java	(revision )
+@@ -25,4 +25,10 @@
+ 	public void setPosY(int posY) {
+ 		this.posY = posY;
+ 	}
++	public void adyacentes(){
++		ArrayList<Casilla> adya=new ArrayList<Casilla>;
++		if(){
++
++		}
++	}
+ }
+Index: src/pruebas/Tablero.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package pruebas;\n\nimport java.io.File;\nimport java.io.FileNotFoundException;\nimport java.util.Scanner;\n\npublic class Tablero {\n\n\tint filas;\n\tint columnas;\n\tint tablero[][];\n\tint V; // cantidad de Arena que va haber en todo el tablero\n\tint K; // cantidad de arena que va a haber en cada casilla\n\tint max; // cantidad máxima que almacena cada casilla\n\n\tpublic Tablero(){\n\n\t}\n\n\tTablero(int filas, int columnas) {\n\n\t\tthis.filas = filas;\n\t\tthis.columnas = columnas;\n\t\ttablero = new int[filas][columnas];\n\n\t}\n\tvoid rellenarTableroFichero(){\n\t\tScanner entrada = null;\n\t\ttry {\n\t\t\tentrada = new Scanner(new File(\"prueba.txt\"));\n\t\t} catch (FileNotFoundException e) {\n\t\t\te.printStackTrace();\n\t\t}\n\t\tint [] datos = new int [6];\n\n\t\tfor (int j = 0; j < 5; j++) {\n\t\t\tdatos[j]=entrada.nextInt();\n\t\t}\n\t\tthis.filas=datos[0];\n\t\tthis.columnas=datos[1];\n\t\ttablero=new int[this.filas][this.columnas];\n\t\tfor (int j = 0; j < datos[0]; j++) { //fila\n\t\t\tfor (int k = 0; k < datos[1]; k++) { //columna\n\t\t\t\ttablero[j][k]=entrada.nextInt();\n\t\t\t}\n\t\t}\n\t}\n\t//*****************************************************\n\t// Métodos para generar el Terreno de Manera Aleatoria\n\t//*****************************************************\n\n\t\n\tvoid generarTerrenoRnd(){\n\t\tV =(int) (Math.random()*99)+1;;\n\t\tfilas = (int) (Math.random()*9)+1;\n\t\tcolumnas = (int) (Math.random()*9)+1;\n\t\tK=V/filas*columnas;\n\t\tmax=(int) (Math.random()*(V-1))+1;; //cantidad máxima que puede almacenar cada casilla\n\t\tint total=V;\n\t\ttablero=new int[filas][columnas];\n\t\tfor (int i = 0; i < filas; i++) {\n\t\t\tfor (int j = 0; j < columnas; j++) {\n\t\t\t\tif(total<max){\n\t\t\t\t\ttablero[i][j]=(int) (Math.random()*total);\n\t\t\t\t}else{\n\t\t\t\t\ttablero[i][j] = (int) (Math.random()*max);\n\t\t\t\t}\n\n\t\t\t\ttotal = total - tablero[i][j];\n\t\t\t}\n\t\t\tSystem.out.println(\"\\n\");\n\t\t}\n\n\t}\n\n\n\tvoid imprimirTablero() {\n\t\tfor (int i = 0; i < this.filas; i++) {\n\t\t\tfor (int j = 0; j < this.columnas; j++) {\n\t\t\t\tSystem.out.print(tablero[i][j] + \"\\t\");\n\t\t\t}\n\t\t\tSystem.out.println(\"\\n\");\n\t\t}\n\t}\n\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/pruebas/Tablero.java	(date 1507560136000)
++++ src/pruebas/Tablero.java	(revision )
+@@ -6,9 +6,9 @@
+ 
+ public class Tablero {
+ 
+-	int filas;
+-	int columnas;
+-	int tablero[][];
++	public static int filas;
++	public static int columnas;
++	public static int tablero[][];
+ 	int V; // cantidad de Arena que va haber en todo el tablero
+ 	int K; // cantidad de arena que va a haber en cada casilla
+ 	int max; // cantidad máxima que almacena cada casilla
+@@ -36,8 +36,8 @@
+ 		for (int j = 0; j < 5; j++) {
+ 			datos[j]=entrada.nextInt();
+ 		}
+-		this.filas=datos[0];
+-		this.columnas=datos[1];
++		this.filas=datos[4];
++		this.columnas=datos[5];
+ 		tablero=new int[this.filas][this.columnas];
+ 		for (int j = 0; j < datos[0]; j++) { //fila
+ 			for (int k = 0; k < datos[1]; k++) { //columna

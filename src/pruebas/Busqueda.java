@@ -1,8 +1,6 @@
 package pruebas;
 
-import java.util.ArrayList;
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.*;
 
 public class Busqueda {
 
@@ -16,19 +14,18 @@ public class Busqueda {
         }
             return n2;
     }
-    public boolean comprobarNodo(ArrayList<Nodo> nodosvisitados, Nodo nodo){
+    public Hashtable<String, Nodo> comprobarNodo(Hashtable<String, Nodo> visitados, Nodo nodo, int tipoB, Frontera f){
         boolean b=false;
         Estado es2=nodo.getEstado();
-        for (int i=0; i<nodosvisitados.size();i++){
-            Estado es=nodosvisitados.get(i).getEstado();
-            if(es.getPosX()==es2.getPosX() && es.getPosY()==es2.getPosY() && es.getTerreno().equals(es2.getTerreno())){
-                b=true;
-                i=nodosvisitados.size()+2;
-                }
+        int aux = 0;
 
-            }
-
-        return b;
+        System.out.println("tamaño frontera: "+f.getFrontera().size());
+        if(!visitados.containsKey(nodo.getId()) ) {
+           System.out.println("ID "+nodo.getId());
+            visitados.put(nodo.getId(), nodo);
+            f.insertarNodo(nodo);
+        }
+        return visitados;
     }
 
 
