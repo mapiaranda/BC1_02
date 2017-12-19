@@ -1,21 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ce900f9c-f665-4cbc-93c3-d94257d66220" name="Default" comment="FaltaPoda">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/BC1_02/pruebas/Busqueda.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/pruebas/Busqueda.java" afterPath="" />
+    <list default="true" id="ce900f9c-f665-4cbc-93c3-d94257d66220" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BC1_02/pruebas/Accion.class" afterPath="$PROJECT_DIR$/out/production/BC1_02/pruebas/Accion.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BC1_02/pruebas/EspacioDeEstados.class" afterPath="$PROJECT_DIR$/out/production/BC1_02/pruebas/EspacioDeEstados.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BC1_02/pruebas/Estrategia.class" afterPath="$PROJECT_DIR$/out/production/BC1_02/pruebas/Estrategia.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BC1_02/pruebas/Nodo.class" afterPath="$PROJECT_DIR$/out/production/BC1_02/pruebas/Nodo.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BC1_02/pruebas/Problema.class" afterPath="$PROJECT_DIR$/out/production/BC1_02/pruebas/Problema.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BC1_02/pruebas/Estado.class" afterPath="$PROJECT_DIR$/out/production/BC1_02/pruebas/Estado.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Problema.dat" afterPath="$PROJECT_DIR$/Problema.dat" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/solucion.txt" afterPath="$PROJECT_DIR$/solucion.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pruebas/Accion.java" afterPath="$PROJECT_DIR$/src/pruebas/Accion.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pruebas/EspacioDeEstados.java" afterPath="$PROJECT_DIR$/src/pruebas/EspacioDeEstados.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pruebas/Estado.java" afterPath="$PROJECT_DIR$/src/pruebas/Estado.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pruebas/Estrategia.java" afterPath="$PROJECT_DIR$/src/pruebas/Estrategia.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pruebas/Nodo.java" afterPath="$PROJECT_DIR$/src/pruebas/Nodo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pruebas/Problema.java" afterPath="$PROJECT_DIR$/src/pruebas/Problema.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="D:\IntelliJ\BC1_02\.idea\shelf/" />
@@ -28,15 +23,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="EspacioDeEstados.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="EspacioDeEstados.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/pruebas/EspacioDeEstados.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="162" column="0" lean-forward="false" selection-start-line="162" selection-start-column="0" selection-end-line="162" selection-end-column="0" />
+            <state relative-caret-position="85">
+              <caret line="145" column="43" lean-forward="false" selection-start-line="145" selection-start-column="43" selection-end-line="145" selection-end-column="43" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2959#2972#0" expanded="true" />
+                <element signature="e#2960#2973#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Problema.dat" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Problema.dat">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="3" lean-forward="false" selection-start-line="0" selection-start-column="3" selection-end-line="0" selection-end-column="3" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -64,22 +69,22 @@
       <file leaf-file-name="Nodo.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pruebas/Nodo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="16" column="91" lean-forward="false" selection-start-line="16" selection-start-column="81" selection-end-line="16" selection-end-column="91" />
+            <state relative-caret-position="272">
+              <caret line="16" column="84" lean-forward="false" selection-start-line="16" selection-start-column="84" selection-end-line="16" selection-end-column="84" />
               <folding>
-                <element signature="e#1504#1505#0" expanded="true" />
-                <element signature="e#1523#1524#0" expanded="true" />
-                <element signature="e#1590#1591#0" expanded="true" />
-                <element signature="e#1615#1616#0" expanded="true" />
+                <element signature="e#1510#1511#0" expanded="true" />
+                <element signature="e#1529#1530#0" expanded="true" />
+                <element signature="e#1596#1597#0" expanded="true" />
+                <element signature="e#1621#1622#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Estado.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Estado.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pruebas/Estado.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="207">
+            <state relative-caret-position="-177">
               <caret line="100" column="32" lean-forward="false" selection-start-line="100" selection-start-column="32" selection-end-line="100" selection-end-column="32" />
               <folding />
             </state>
@@ -101,8 +106,8 @@
       <file leaf-file-name="Estrategia.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pruebas/Estrategia.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="27" column="48" lean-forward="true" selection-start-line="27" selection-start-column="48" selection-end-line="27" selection-end-column="48" />
+            <state relative-caret-position="459">
+              <caret line="27" column="79" lean-forward="true" selection-start-line="27" selection-start-column="79" selection-end-line="27" selection-end-column="79" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#400#406#0" expanded="true" />
@@ -114,8 +119,8 @@
       <file leaf-file-name="Accion.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pruebas/Accion.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="68" column="16" lean-forward="false" selection-start-line="68" selection-start-column="16" selection-end-line="68" selection-end-column="16" />
+            <state relative-caret-position="255">
+              <caret line="15" column="15" lean-forward="true" selection-start-line="15" selection-start-column="15" selection-end-line="15" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -124,8 +129,8 @@
       <file leaf-file-name="Problema.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pruebas/Problema.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="125" column="26" lean-forward="false" selection-start-line="125" selection-start-column="26" selection-end-line="125" selection-end-column="26" />
+            <state relative-caret-position="170">
+              <caret line="10" column="26" lean-forward="false" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -216,12 +221,13 @@
         <option value="$PROJECT_DIR$/src/pruebas/Sucesores.java" />
         <option value="$PROJECT_DIR$/src/pruebas/Frontera.java" />
         <option value="$PROJECT_DIR$/src/pruebas/main.java" />
-        <option value="$PROJECT_DIR$/src/pruebas/Nodo.java" />
-        <option value="$PROJECT_DIR$/src/pruebas/EspacioDeEstados.java" />
         <option value="$PROJECT_DIR$/src/pruebas/Problema.java" />
         <option value="$PROJECT_DIR$/src/pruebas/Accion.java" />
-        <option value="$PROJECT_DIR$/src/pruebas/Estrategia.java" />
         <option value="$PROJECT_DIR$/src/pruebas/Estado.java" />
+        <option value="$PROJECT_DIR$/src/pruebas/Nodo.java" />
+        <option value="$PROJECT_DIR$/Problema.dat" />
+        <option value="$PROJECT_DIR$/src/pruebas/Estrategia.java" />
+        <option value="$PROJECT_DIR$/src/pruebas/EspacioDeEstados.java" />
       </list>
     </option>
   </component>
@@ -488,7 +494,7 @@
       <workItem from="1513268489681" duration="15399000" />
       <workItem from="1513533584528" duration="31000" />
       <workItem from="1513620539154" duration="14698000" />
-      <workItem from="1513695117841" duration="26525000" />
+      <workItem from="1513695117841" duration="29643000" />
     </task>
     <task id="LOCAL-00001" summary=".">
       <created>1507395062559</created>
@@ -644,11 +650,18 @@
       <option name="project" value="LOCAL" />
       <updated>1512502877622</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Ultimo">
+      <created>1513723640094</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1513723640094</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="232183000" />
+    <option name="totallyTimeSpent" value="235301000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -661,6 +674,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1358" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32826087" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -670,7 +684,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4597826" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.66630435" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32826087" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2173913" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -757,18 +771,11 @@
     <MESSAGE value="Merge remote-tracking branch 'remotes/origin/mapi'&#10;&#10;# Conflicts:&#10;#&#9;src/Tablero.java&#10;#&#9;src/Tractor.java&#10;#&#9;src/main.java" />
     <MESSAGE value="Anchura" />
     <MESSAGE value="FaltaPoda" />
-    <option name="LAST_COMMIT_MESSAGE" value="FaltaPoda" />
+    <MESSAGE value="Ultimo" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ultimo" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/pruebas/Estrategia.java</url>
-          <line>22</line>
-          <properties />
-          <option name="timeStamp" value="20" />
-        </line-breakpoint>
-      </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
@@ -1000,14 +1007,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Problema.dat">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="3" lean-forward="false" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pruebas/Busqueda.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -1032,27 +1031,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pruebas/Nodo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="16" column="91" lean-forward="false" selection-start-line="16" selection-start-column="81" selection-end-line="16" selection-end-column="91" />
-          <folding>
-            <element signature="e#1504#1505#0" expanded="true" />
-            <element signature="e#1523#1524#0" expanded="true" />
-            <element signature="e#1590#1591#0" expanded="true" />
-            <element signature="e#1615#1616#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pruebas/Frontera.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="24" column="20" lean-forward="false" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pruebas/main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="447">
@@ -1065,37 +1043,63 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pruebas/Problema.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="125" column="26" lean-forward="false" selection-start-line="125" selection-start-column="26" selection-end-line="125" selection-end-column="26" />
+        <state relative-caret-position="170">
+          <caret line="10" column="26" lean-forward="false" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pruebas/Estado.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-177">
+          <caret line="100" column="32" lean-forward="false" selection-start-line="100" selection-start-column="32" selection-end-line="100" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pruebas/Frontera.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="24" column="20" lean-forward="false" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pruebas/Nodo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="84" lean-forward="false" selection-start-line="16" selection-start-column="84" selection-end-line="16" selection-end-column="84" />
+          <folding>
+            <element signature="e#1510#1511#0" expanded="true" />
+            <element signature="e#1529#1530#0" expanded="true" />
+            <element signature="e#1596#1597#0" expanded="true" />
+            <element signature="e#1621#1622#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pruebas/Accion.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="68" column="16" lean-forward="false" selection-start-line="68" selection-start-column="16" selection-end-line="68" selection-end-column="16" />
+        <state relative-caret-position="255">
+          <caret line="15" column="15" lean-forward="true" selection-start-line="15" selection-start-column="15" selection-end-line="15" selection-end-column="15" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pruebas/EspacioDeEstados.java">
+    <entry file="file://$PROJECT_DIR$/Problema.dat">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="162" column="0" lean-forward="false" selection-start-line="162" selection-start-column="0" selection-end-line="162" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2959#2972#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="0" column="3" lean-forward="false" selection-start-line="0" selection-start-column="3" selection-end-line="0" selection-end-column="3" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pruebas/Estrategia.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="27" column="48" lean-forward="true" selection-start-line="27" selection-start-column="48" selection-end-line="27" selection-end-column="48" />
+        <state relative-caret-position="459">
+          <caret line="27" column="79" lean-forward="true" selection-start-line="27" selection-start-column="79" selection-end-line="27" selection-end-column="79" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#400#406#0" expanded="true" />
@@ -1103,11 +1107,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pruebas/Estado.java">
+    <entry file="file://$PROJECT_DIR$/src/pruebas/EspacioDeEstados.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="100" column="32" lean-forward="false" selection-start-line="100" selection-start-column="32" selection-end-line="100" selection-end-column="32" />
-          <folding />
+        <state relative-caret-position="85">
+          <caret line="145" column="43" lean-forward="false" selection-start-line="145" selection-start-column="43" selection-end-line="145" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2960#2973#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

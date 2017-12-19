@@ -8,13 +8,13 @@ public class Nodo implements Comparable<Nodo>{
 	private Estado estado;
 	private String accion; //arriba, abajo, derecha, izq
 	private int costo; //número de movimientos
-	private int valor; //valor por el cual se ordenará la frontera
+	private double valor; //valor por el cual se ordenará la frontera
 	private int profundidad; //valor de la profundidad
 	private boolean visitado;
 	private Accion acc;
 
 
-	public Nodo(String id, Nodo padre, Estado estado, String accion, Accion acc, int costo, int valor, int profundidad) {
+	public Nodo(String id, Nodo padre, Estado estado, String accion, Accion acc, int costo, double valor, int profundidad) {
 		this.id=id;
 		this.padre = padre;
 		this.estado = estado;
@@ -99,7 +99,7 @@ public class Nodo implements Comparable<Nodo>{
 	 * 
 	 * @return int
 	 */
-	public int getValor() {
+	public double getValor() {
 		return valor;
 	}
 	
@@ -107,7 +107,7 @@ public class Nodo implements Comparable<Nodo>{
 	 * 
 	 * @param valor
 	 */
-	public void setValor(int valor) {
+	public void setValor(double valor) {
 		this.valor = valor;
 	}
 	

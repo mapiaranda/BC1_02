@@ -10,6 +10,7 @@ public class EspacioDeEstados {
     ArrayList<Distribucion>distri = new ArrayList<>();
     ArrayList<Sucesores>lista_sucesores=new ArrayList<>();
     ArrayList<Estado> lista_adya=new ArrayList<>();
+
     int sobrante;
 
 
@@ -78,6 +79,13 @@ public class EspacioDeEstados {
         Frontera f = new Frontera();
         Hashtable<String,Nodo> visitados = new Hashtable<String,Nodo>();
         Nodo nodo_inicial=new Nodo(prob.encriptarMD5(prob.getEs()), null, prob.getEs(), "",null, 0,esObjetivo(prob.getEs()),0);
+
+        /*
+        calcularAdya(nodo_inicial.getEstado());
+        ArrayList<Sucesores> suce=CalcularSucesores(nodo_inicial);
+        for (int i=0;i<suce.size();i++){
+            System.out.println(suce.get(i).getA().toString());
+        }*/
         visitados.put(nodo_inicial.getId(), nodo_inicial);
         f.insertarNodo(nodo_inicial);
         Nodo nodoActual = new Nodo();
@@ -134,10 +142,11 @@ public class EspacioDeEstados {
         int profundidad=nodo_acutal.getProfundidad()+1;
         for(int i=0; i<suc.size(); i++){
             //System.out.println("Accion sucesor "+suc.get(i).getA());
-            int heuristica=esObjetivo(suc.get(i).getE());
+            //int heuristica=esObjetivo(suc.get(i).getE());
+            double heuristica=(esObjetivo(suc.get(i).getE())*0.7);
             int coste=suc.get(i).getA().getCosto();
             try {
-                int valor=0;
+                double valor=0;
                 switch (tipoB){
                     case 0:
                         //Anchura
@@ -152,8 +161,9 @@ public class EspacioDeEstados {
                         valor=nodo_acutal.getCosto()-coste;
                         break;
                     case 3:
-                        //Heuristica
-                        valor=nodo_acutal.getCosto()+coste+heuristica;
+                        //Heuristica A *
+                        //valor=nodo_acutal.getCosto()+coste+heuristica;
+                        valor=((nodo_acutal.getCosto()+coste)*0.3)+heuristica;
                         break;
                     case 4:
                         //Voraz

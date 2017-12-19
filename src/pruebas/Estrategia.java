@@ -24,7 +24,8 @@ public class Estrategia {
             }
            // System.out.println("accion estrategia "+a.toString());
             if(nodo.getPadre()!=null){
-                System.out.println("Accion: "+a.toString());
+                System.out.println("Accion "+nodo.getAcc().toString()); //Mostrar la accion (2)
+                System.out.println("Valor: "+nodo.getValor()); //Mostrar el valor (3)
                 System.out.println(Estado.imp_terrain(nodo.getEstado().getTerreno()));
                 Problema.escribir(nodo, a, escribirCoste);
                 escribirCoste=true;
