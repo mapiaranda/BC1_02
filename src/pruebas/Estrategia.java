@@ -15,7 +15,8 @@ public class Estrategia {
 
         generar.rellenarTableroFichero(tipoB, prof_max);
         cola=generar.getEspacio().Busqueda_Acotada(generar,tipoB,prof_max);
-        System.out.println("Profundidad: "+prof_max);
+        
+       // System.out.println("Profundidad: "+prof_max);
         while(!cola.isEmpty() && cola!=null ){
             nodo=cola.poll();
             Accion a=nodo.getAcc();

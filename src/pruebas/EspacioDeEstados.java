@@ -104,7 +104,7 @@ public class EspacioDeEstados {
             }
         }
         if(solucion==true){
-
+            System.out.println("Profundidad de solucion "+nodoActual.getProfundidad());
             return CreaSolucion(nodoActual);
         }else{
 
@@ -158,7 +158,7 @@ public class EspacioDeEstados {
                         break;
                     case 2:
                         //Coste uniforme
-                        valor=nodo_acutal.getCosto()-coste;
+                        valor=nodo_acutal.getCosto()+coste;
                         break;
                     case 3:
                         //Heuristica A *

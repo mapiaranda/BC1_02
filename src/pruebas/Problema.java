@@ -44,7 +44,7 @@ public class Problema {
         Scanner entrada = null;
         Estado e=new Estado();
         try {
-            entrada = new Scanner(new File("Problema.dat"));
+            entrada = new Scanner(new File("Examen.dat"));
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
         }
